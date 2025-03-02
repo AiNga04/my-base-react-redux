@@ -5,4 +5,16 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  .app-container {
+    .header-container {
+      .navbar-nav {
+        .nav-link {
+          &.active {
+            color: #00bfff;
+          }
+        }
+      }
+    }
+  }
 }

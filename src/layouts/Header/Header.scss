@@ -1,0 +1,47 @@
+.header-container {
+  .navbar {
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.5) !important;
+    .navbar-nav {
+      .nav-link {
+        &.active {
+          color: #007bff;
+        }
+        color: #333;
+        font-weight: 500;
+      }
+
+      .btn {
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 0 10px;
+        margin: 0 10px;
+        color: #333;
+        font-weight: 500;
+        &:hover {
+          background-color: #007bff;
+          color: white;
+          cursor: pointer;
+        }
+      }
+
+      .btn-login {
+        background-color: #f8f9fa;
+        height: 40px;
+      }
+
+      .btn-signup {
+        background-color: #007bff;
+        height: 40px;
+        color: white;
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+    }
+    .navbar-brand {
+      color: #333;
+      font-weight: 500;
+    }
+  }
+}

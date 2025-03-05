@@ -1,0 +1,24 @@
+.role {
+  width: 100%;
+  padding: 6px 12px;
+  border: 0.8px solid #dee2e6;
+  border-radius: 0.375rem;
+}
+
+.image-preview {
+  padding: 6px 12px;
+  .preview-desc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    border: 0.8px dotted #ccc;
+    color: #ccc;
+    border-radius: 0.375rem;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+}

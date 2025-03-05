@@ -41,13 +41,24 @@ const Sidebar = (props) => {
               Home
             </NavLink>{" "}
           </MenuItem>
+          <MenuItem icon={<FaChartBar />}>
+            {" "}
+            <NavLink className="nav-link" to="/admins">
+              DashBoard
+            </NavLink>
+          </MenuItem>
           <SubMenu label="Quizzes" icon={<FaQuestionCircle />}>
             <MenuItem> General Knowledge </MenuItem>
+            <MenuItem>
+              {" "}
+              <NavLink className="nav-link" to="/admins/manage-users">
+                Manage User
+              </NavLink>
+            </MenuItem>
             <MenuItem> Science </MenuItem>
             <MenuItem> History </MenuItem>
             <MenuItem> Sports </MenuItem>
           </SubMenu>
-          <MenuItem icon={<FaChartBar />}> Leaderboard </MenuItem>
           <MenuItem icon={<FaUser />}> Profile </MenuItem>
           <MenuItem icon={<FaCog />}> Settings </MenuItem>
           <MenuItem icon={<FaSignOutAlt />}> Logout </MenuItem>

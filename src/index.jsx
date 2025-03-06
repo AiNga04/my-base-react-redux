@@ -1,34 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import User from "./pages/User/User";
-import Admin from "./pages/Admin/Admin";
-import About from "./pages/About/About";
-import Home from "./pages/Home/Home";
-import DashBoard from "./pages/Admin/Content/DashBoard";
-import ManageUser from "./pages/Admin/Content/ManageUser";
+import { BrowserRouter } from "react-router-dom";
+import Layout from "./Layout";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <React.StrictMode>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />}>
-            <Route index element={<Home />} />
-            <Route path="users" element={<User />} />
-            <Route path="abouts" element={<About />} />
-          </Route>
-          <Route path="admins" element={<Admin />}>
-            <Route index element={<DashBoard />} />
-            <Route path="manage-users" element={<ManageUser />} />
-          </Route>
-        </Routes>
+        <Layout />
       </BrowserRouter>
     </React.StrictMode>
   </Provider>

@@ -1,17 +1,22 @@
-import React from "react";
 import Table from "react-bootstrap/Table";
+import ReactPaginate from "react-paginate";
+import React from "react";
+import "./ManageUser.scss";
 
-const TableUser = (props) => {
+const TableUserPaginate = (props) => {
   const {
     listUsers,
     handleShowUpdateModal,
     handleShowViewModal,
     handleShowDeleteModal,
+    pageCount,
+    handlePageClick,
+    currentPage,
   } = props;
 
   return (
     <>
-      <Table striped bordered hover size="xl">
+      <Table striped bordered hover size="md" className="table-user">
         <thead>
           <tr>
             <th>No</th>
@@ -36,7 +41,7 @@ const TableUser = (props) => {
                     onClick={() => {
                       handleShowViewModal(user);
                     }}
-                    className="btn btn-info"
+                    className="btn btn-view"
                   >
                     View
                   </button>
@@ -45,7 +50,7 @@ const TableUser = (props) => {
                       handleShowUpdateModal(user);
                     }}
                     type="button"
-                    className="btn btn-warning mx-3"
+                    className="btn btn-update mx-3"
                   >
                     Update
                   </button>
@@ -54,7 +59,7 @@ const TableUser = (props) => {
                     onClick={() => {
                       handleShowDeleteModal(user);
                     }}
-                    className="btn btn-danger"
+                    className="btn btn-delete"
                   >
                     Delete
                   </button>
@@ -63,8 +68,32 @@ const TableUser = (props) => {
             ))}
         </tbody>
       </Table>
+
+      <div className="user-pagination">
+        <ReactPaginate
+          nextLabel="Next >"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={2}
+          pageCount={pageCount}
+          previousLabel="< Prev"
+          pageClassName="page-item"
+          pageLinkClassName="page-link"
+          previousClassName="page-item"
+          previousLinkClassName="page-link"
+          nextClassName="page-item"
+          nextLinkClassName="page-link"
+          breakLabel="..."
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
+          containerClassName="pagination"
+          activeClassName="active"
+          renderOnZeroPageCount={null}
+          forcePage={currentPage - 1}
+        />
+      </div>
     </>
   );
 };
 
-export default TableUser;
+export default TableUserPaginate;

@@ -1,0 +1,74 @@
+.admin-content {
+  width: 100%;
+
+  .admin-main {
+    .manage-users {
+      font-size: 3rem;
+      font-weight: 600;
+    }
+
+    .btn-delete {
+      padding: 6px 12px;
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      &:hover {
+        background-color: #a51008;
+      }
+    }
+
+    .btn-update {
+      padding: 6px 12px;
+      background-color: #ffc107;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      &:hover {
+        background-color: #c5a137;
+      }
+    }
+
+    .btn-view {
+      padding: 6px 12px;
+      background-color: #0dcaf0;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      &:hover {
+        background-color: #0298b7;
+      }
+    }
+
+    .btn-add-user {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 12px;
+      margin-bottom: 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  }
+
+  .user-pagination {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

@@ -1,6 +1,6 @@
 import axios from "../../utils/axiosCustomize";
 
-const PostCreateNewUser = (email, password, username, role, image) => {
+const postCreateNewUser = (email, password, username, role, image) => {
   const formData = new FormData();
   formData.append("email", email);
   formData.append("password", password);
@@ -11,6 +11,28 @@ const PostCreateNewUser = (email, password, username, role, image) => {
   return axios.post("api/v1/participant", formData);
 };
 
-const GetListUsers = () => axios.get("api/v1/participant/all");
+const getListUsers = () => axios.get("api/v1/participant/all");
 
-export { PostCreateNewUser, GetListUsers };
+const getUpdateUser = (id, username, role, image) => {
+  const formData = new FormData();
+  formData.append("id", id);
+  formData.append("username", username);
+  formData.append("role", role);
+  formData.append("userImage", image);
+
+  return axios.put("api/v1/participant", formData);
+};
+const deleteUserById = (userId) => {
+  return axios.delete("api/v1/participant", { data: { id: userId } });
+};
+const getUserWithPaginate = (page, limit) => {
+  return axios.get(`api/v1/participant?page=${page}&limit=${limit}`);
+};
+
+export {
+  postCreateNewUser,
+  getListUsers,
+  getUpdateUser,
+  deleteUserById,
+  getUserWithPaginate,
+};

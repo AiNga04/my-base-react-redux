@@ -5,76 +5,34 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import "./ModalCreateUser.scss";
-import { toast } from "react-toastify";
-import { getUpdateUser } from "../../../services/api/UserService";
 import _ from "lodash";
 
-function ModalUpdateUser(props) {
-  const {
-    show,
-    handleClose,
-    fetchUserListWithPaginate,
-    dataUpdate,
-    reserUpdateUser,
-    currentPage,
-    LIMIT_USER_LIST,
-  } = props;
+function ModalViewUser(props) {
+  const { show, handleClose, dataView, resetViewUser } = props;
 
   const handleClickClose = () => {
     setEmail("");
     setUsername("");
     setRole("USER");
-    setImage(null);
-    setImagePreview(null);
     handleClose();
-    reserUpdateUser();
+    resetViewUser();
   };
 
   const [email, setEmail] = useState("");
-  const [id, setId] = useState("");
   const [username, setUsername] = useState("");
   const [role, setRole] = useState("USER");
-  const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
 
   useEffect(() => {
-    if (!_.isEmpty(dataUpdate)) {
-      setId(dataUpdate.id);
-      setEmail(dataUpdate.email);
-      setUsername(dataUpdate.username);
-      setRole(dataUpdate.role);
-      if (dataUpdate.image) {
-        setImagePreview(`data:image/jpeg;base64,${dataUpdate.image}`);
+    if (!_.isEmpty(dataView)) {
+      setEmail(dataView.email);
+      setUsername(dataView.username);
+      setRole(dataView.role);
+      if (dataView.image) {
+        setImagePreview(`data:image/jpeg;base64,${dataView.image}`);
       }
     }
-  }, [dataUpdate]);
-
-  const handleChangeImage = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      setImage(file);
-      setImagePreview(URL.createObjectURL(file));
-    }
-  };
-
-  const handleSubmitUser = async () => {
-    const formData = new FormData();
-    formData.append("id", id);
-    formData.append("username", username);
-    formData.append("role", role);
-    formData.append("userImage", image);
-
-    try {
-      const data = await getUpdateUser(id, username, role, image);
-      if (data && data.EC === 0) toast.success(data.EM);
-      console.log(data);
-      if (data && data.EC !== 0) toast.error(data.EM);
-      fetchUserListWithPaginate(currentPage, LIMIT_USER_LIST);
-      handleClickClose();
-    } catch (error) {
-      console.error("Error creating user:", error);
-    }
-  };
+  }, [dataView]);
 
   return (
     <>
@@ -107,6 +65,7 @@ function ModalUpdateUser(props) {
               <Form.Group as={Col} md="12" controlId="validationCustom02">
                 <Form.Label>Username</Form.Label>
                 <Form.Control
+                  disabled
                   required
                   type="text"
                   placeholder="Username"
@@ -122,6 +81,7 @@ function ModalUpdateUser(props) {
                 <Form.Label>Role</Form.Label>
                 <br />
                 <select
+                  disabled
                   name="role"
                   id="role"
                   className="role"
@@ -137,11 +97,7 @@ function ModalUpdateUser(props) {
             <Row className="mb-3">
               <Form.Group as={Col} md="12" controlId="validationCustom06">
                 <Form.Label>Image</Form.Label>
-                <Form.Control
-                  required
-                  type="file"
-                  onChange={handleChangeImage}
-                />
+                <Form.Control disabled required type="file" />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
             </Row>
@@ -165,10 +121,7 @@ function ModalUpdateUser(props) {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClickClose}>
-            Cancel
-          </Button>
-          <Button variant="primary" onClick={handleSubmitUser}>
-            Save User
+            Close
           </Button>
         </Modal.Footer>
       </Modal>
@@ -176,4 +129,4 @@ function ModalUpdateUser(props) {
   );
 }
 
-export default ModalUpdateUser;
+export default ModalViewUser;

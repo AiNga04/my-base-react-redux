@@ -4,10 +4,15 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 import "./Header.scss";
 
 function Header() {
   const navigate = useNavigate();
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const account = useSelector((state) => state.user.account);
+
+  console.log(account);
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
@@ -31,27 +36,31 @@ function Header() {
             </NavLink>
           </Nav>
           <Nav>
-            <button
-              className="btn btn-login"
-              onClick={() => {
-                navigate("/auth/login");
-              }}
-            >
-              Log in
-            </button>
-            <button
-              className="btn btn-signup"
-              onClick={() => {
-                navigate("/auth/sign-up");
-              }}
-            >
-              Sign up
-            </button>
-            <NavDropdown title="Setting" id="basic-nav-dropdown">
-              <NavDropdown.Item>Log in</NavDropdown.Item>
-              <NavDropdown.Item>Log out</NavDropdown.Item>
-              <NavDropdown.Item>Profile</NavDropdown.Item>
-            </NavDropdown>
+            {isAuthenticated === false ? (
+              <>
+                <button
+                  className="btn btn-login"
+                  onClick={() => {
+                    navigate("/auth/login");
+                  }}
+                >
+                  Log in
+                </button>
+                <button
+                  className="btn btn-signup"
+                  onClick={() => {
+                    navigate("/auth/sign-up");
+                  }}
+                >
+                  Sign up
+                </button>
+              </>
+            ) : (
+              <NavDropdown title="Setting" id="basic-nav-dropdown">
+                <NavDropdown.Item>Log out</NavDropdown.Item>
+                <NavDropdown.Item>Profile</NavDropdown.Item>
+              </NavDropdown>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

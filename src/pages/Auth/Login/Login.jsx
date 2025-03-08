@@ -5,6 +5,8 @@ import { useNavigate } from "react-router";
 import { postLogin } from "../../../services/api/AuthService";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
+import { useDispatch } from "react-redux";
+import { doLogin } from "../../../redux/action/userAction";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -12,6 +14,7 @@ const Login = () => {
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   const [isVisible, setVisible] = useState(false);
+  const dispatch = useDispatch();
 
   const toggle = () => {
     setVisible(!isVisible);
@@ -63,6 +66,7 @@ const Login = () => {
     const data = await postLogin(email, password);
     if (data && data.EC === 0) {
       toast.success(data.EM);
+      dispatch(doLogin(data));
       navigate("/");
     }
     if (data && data.EC !== 0) toast.error(data.EM);

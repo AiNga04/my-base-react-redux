@@ -1,8 +1,12 @@
 import React from "react";
 import "./Home.scss";
 import quizHome from "../../assets/videos/quizhome.mp4";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Home = (props) => {
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const navigate = useNavigate();
   return (
     <div className="home-container">
       <video autoPlay loop muted className="background-video">
@@ -17,7 +21,25 @@ const Home = (props) => {
             Test your knowledge with a wide range of quizzes across various
             topics. Play now, challenge yourself, and climb the leaderboard!
           </p>
-          <button className="btn btn-start-quiz">Start Quiz</button>
+          {isAuthenticated ? (
+            <button
+              className="btn btn-start-quiz"
+              onClick={() => {
+                navigate("/users");
+              }}
+            >
+              Start Quiz
+            </button>
+          ) : (
+            <button
+              className="btn btn-start-quiz"
+              onClick={() => {
+                navigate("/auth/login");
+              }}
+            >
+              Start Quiz
+            </button>
+          )}
         </div>
       </div>
     </div>

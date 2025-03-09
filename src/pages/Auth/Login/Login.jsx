@@ -15,6 +15,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [isVisible, setVisible] = useState(false);
   const dispatch = useDispatch();
+  const [isActive, setActive] = useState(false);
 
   const toggle = () => {
     setVisible(!isVisible);
@@ -62,13 +63,16 @@ const Login = () => {
       toast.error("Password is required");
       return;
     }
-
+    setActive(true);
     const data = await postLogin(email, password);
     if (data && data.EC === 0) {
       toast.success(data.EM);
       dispatch(doLogin(data));
+      setActive(false);
+
       navigate("/");
     }
+    setActive(false);
     if (data && data.EC !== 0) toast.error(data.EM);
   };
 
@@ -131,7 +135,11 @@ const Login = () => {
                 Forgot password
               </span>
             </div>
-            <button type="submit" className="btn btn-primary">
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={isActive}
+            >
               Login
             </button>
             <div>

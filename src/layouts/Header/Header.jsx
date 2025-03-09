@@ -12,7 +12,6 @@ function Header() {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const account = useSelector((state) => state.user.account);
 
-  console.log(account);
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
@@ -31,9 +30,11 @@ function Header() {
             <NavLink className="nav-link" to="/users">
               User
             </NavLink>
-            <NavLink className="nav-link" to="/admins">
-              Admin
-            </NavLink>
+            {account.role === "ADMIN" && (
+              <NavLink className="nav-link" to="/admins">
+                Admin
+              </NavLink>
+            )}
           </Nav>
           <Nav>
             {isAuthenticated === false ? (

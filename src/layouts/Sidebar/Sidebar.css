@@ -1,0 +1,38 @@
+.sidebar {
+  position: relative;
+  height: 100vh;
+}
+.sidebar .sidebar-header {
+  padding: 20px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 23px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sidebar .sidebar-header span {
+  color: #3e3b3b;
+}
+.sidebar .sidebar-header .sidebar-logo {
+  margin-right: 7px;
+  color: #037095;
+}
+.sidebar .sidebar-footer {
+  position: absolute;
+  padding: 10px;
+  bottom: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sidebar .sidebar-footer .github {
+  margin-top: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #454242;
+}
+.sidebar .sidebar-footer .github .footer-icon {
+  margin-right: 5px;
+}/*# sourceMappingURL=Sidebar.css.map */

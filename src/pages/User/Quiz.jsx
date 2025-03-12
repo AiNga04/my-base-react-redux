@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 const Quiz = () => {
   const navigate = useNavigate();
   const [listQuiz, setListQuiz] = useState([]);
+
   useEffect(() => {
     fetchQuiz();
   }, []);
@@ -26,32 +27,27 @@ const Quiz = () => {
       {listQuiz && listQuiz.length > 0 ? (
         listQuiz.map((quiz, index) => {
           return (
-            <>
-              <Card
-                key={index}
-                style={{ width: "18rem" }}
-                className="quiz-item"
-              >
-                <Card.Img
-                  variant="top"
-                  src={`data:image/png;base64, ${quiz.image}`}
-                  className="quiz-image"
-                />
-
-                <Card.Body>
-                  <Card.Title>{quiz.title}</Card.Title>
-                  <Card.Text>Description: {quiz.description}</Card.Text>
-                  <Button
-                    variant="primary"
-                    onClick={() => {
-                      navigate(`/quiz/${quiz.id}`);
-                    }}
-                  >
-                    Start Quiz
-                  </Button>
-                </Card.Body>
-              </Card>
-            </>
+            <Card key={index} style={{ width: "18rem" }} className="quiz-item">
+              <Card.Img
+                variant="top"
+                src={`data:image/png;base64, ${quiz.image}`}
+                className="quiz-image"
+              />
+              <Card.Body>
+                <Card.Title>{quiz.title}</Card.Title>
+                <Card.Text>Description: {quiz.description}</Card.Text>
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    navigate(`/quiz/${quiz.id}`, {
+                      state: { QuizTitle: quiz.description },
+                    });
+                  }}
+                >
+                  Start Quiz
+                </Button>
+              </Card.Body>
+            </Card>
           );
         })
       ) : (

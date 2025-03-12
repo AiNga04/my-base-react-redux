@@ -1,0 +1,40 @@
+.header-container .navbar {
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.5) !important;
+}
+.header-container .navbar .navbar-nav .nav-link {
+  color: #333;
+  font-weight: 500;
+}
+.header-container .navbar .navbar-nav .nav-link.active {
+  color: #007bff;
+}
+.header-container .navbar .navbar-nav .btn {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 0 10px;
+  margin: 0 10px;
+  color: #333;
+  font-weight: 500;
+}
+.header-container .navbar .navbar-nav .btn:hover {
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+.header-container .navbar .navbar-nav .btn-login {
+  background-color: #f8f9fa;
+  height: 40px;
+}
+.header-container .navbar .navbar-nav .btn-signup {
+  background-color: #007bff;
+  height: 40px;
+  color: white;
+}
+.header-container .navbar .navbar-nav .btn-signup:hover {
+  background-color: #0056b3;
+}
+.header-container .navbar .navbar-brand {
+  color: #333;
+  font-weight: 500;
+}/*# sourceMappingURL=Header.css.map */

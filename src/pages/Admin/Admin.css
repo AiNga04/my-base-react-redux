@@ -1,0 +1,9 @@
+.admin-container {
+  display: flex;
+}
+.admin-container .admin-sidebar {
+  height: 100vh;
+}
+.admin-container .admin-content {
+  padding: 20px;
+}/*# sourceMappingURL=Admin.css.map */

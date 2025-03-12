@@ -1,0 +1,42 @@
+.not-found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+.not-found .content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.not-found .content h1 {
+  font-size: 6rem;
+  margin-bottom: 20px;
+  color: #dc3545;
+}
+.not-found .content h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #343a40;
+}
+.not-found .content p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: #6c757d;
+}
+.not-found .content .home-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.not-found .content .home-button:hover {
+  background-color: #0056b3;
+}/*# sourceMappingURL=NotFound.css.map */

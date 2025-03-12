@@ -7,4 +7,8 @@ const getQuizById = (quizId) => {
   return axios.get(`api/v1/questions-by-quiz?quizId=${quizId}`);
 };
 
-export { getQuizByUser, getQuizById };
+const postSubmitQuiz = (data) => {
+  return axios.post("api/v1/quiz-submit", { ...data });
+};
+
+export { getQuizByUser, getQuizById, postSubmitQuiz };

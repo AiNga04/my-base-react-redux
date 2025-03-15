@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./SignUp.scss";
+import "./SignUp.scss"; // Sử dụng file SCSS
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import { postRegister } from "../../../services/api/AuthService";
@@ -178,7 +178,7 @@ const SignUp = () => {
                 <div className="invalid-feedback">{errors.confirmPassword}</div>
               )}
             </div>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn">
               Sign Up
             </button>
             <div>

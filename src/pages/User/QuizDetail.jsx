@@ -4,8 +4,12 @@ import { getQuizById, postSubmitQuiz } from "../../services/api/QuizService";
 import _ from "lodash";
 import "./QuizDetail.scss";
 import ModalResult from "./ModalResult";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setListData } from "../../redux/action/quizAction";
 
 const QuizDetail = () => {
+  const dispatch = useDispatch();
   const params = useParams();
   const location = useLocation();
   const quizId = params.id;
@@ -22,6 +26,7 @@ const QuizDetail = () => {
       if (!response || !response.DT) return;
 
       let raw = response.DT;
+      dispatch(setListData(raw));
       let data = _.chain(raw)
         .groupBy("id")
         .map((value, key) => {
@@ -41,9 +46,9 @@ const QuizDetail = () => {
 
       setQuiz(data);
     } catch (error) {
-      console.error("Error fetching quiz data:", error);
+      toast.error(error);
     }
-  }, [quizId]);
+  }, [quizId, dispatch]);
 
   useEffect(() => {
     getQuizByIdApi();
@@ -98,7 +103,7 @@ const QuizDetail = () => {
       setData(dataResponse.DT);
       setIsShowModalResult(true);
     } else {
-      console.error("Error submitting quiz:", dataResponse);
+      toast.error(dataResponse.EM);
     }
   };
 

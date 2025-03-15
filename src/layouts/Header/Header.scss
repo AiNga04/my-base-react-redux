@@ -2,46 +2,162 @@
   .navbar {
     z-index: 2;
     background-color: rgba(255, 255, 255, 0.5) !important;
+
+    .navbar-brand {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #071421;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+
     .navbar-nav {
       .nav-link {
-        &.active {
-          color: #007bff;
-        }
-        color: #333;
+        font-size: 1.1rem;
         font-weight: 500;
+        color: #1b2c3d;
+        padding: 10px 15px;
+        position: relative;
+        transition: color 0.3s ease;
+
+        &.active {
+          color: #106095;
+          font-weight: 600;
+        }
+
+        &:hover {
+          color: #106095;
+        }
+
+        &::after {
+          content: "";
+          position: absolute;
+          width: 0;
+          height: 2px;
+          bottom: 5px;
+          left: 50%;
+          background: #3498db;
+          transition: width 0.3s ease, left 0.3s ease;
+        }
+
+        &:hover::after {
+          width: 50%;
+          left: 25%;
+        }
       }
 
       .btn {
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        padding: 0 10px;
+        border-radius: 8px;
+        padding: 8px 20px;
         margin: 0 10px;
-        color: #333;
-        font-weight: 500;
-        &:hover {
-          background-color: #007bff;
-          color: white;
-          cursor: pointer;
-        }
+        font-size: 1rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
       }
 
       .btn-login {
-        background-color: #f8f9fa;
+        background: #ffffff;
+        border: 2px solid #3498db;
+        color: #3498db;
         height: 40px;
+
+        &:hover {
+          background: #3498db;
+          color: #ffffff;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
       }
 
       .btn-signup {
-        background-color: #007bff;
+        background: linear-gradient(45deg, #3498db, #2980b9);
+        border: none;
+        color: #ffffff;
         height: 40px;
-        color: white;
+
         &:hover {
-          background-color: #0056b3;
+          background: linear-gradient(45deg, #2980b9, #2471a3);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
       }
     }
+
+    .nav-dropdown {
+      .dropdown-toggle {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #34495e;
+        padding: 10px 15px;
+
+        &:hover {
+          color: #3498db;
+        }
+      }
+
+      .dropdown-menu {
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        border: none;
+
+        .dropdown-item {
+          font-size: 1rem;
+          color: #34495e;
+          padding: 8px 20px;
+
+          &:hover {
+            background: #f0f2f5;
+            color: #3498db;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+  .navbar {
+    padding: 15px;
+
     .navbar-brand {
-      color: #333;
-      font-weight: 500;
+      font-size: 1.4rem;
+    }
+
+    .navbar-nav {
+      padding: 10px 0;
+
+      .nav-link {
+        font-size: 1rem;
+        padding: 8px 15px;
+      }
+
+      .btn {
+        width: 100%;
+        margin: 5px 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar {
+    .navbar-brand {
+      font-size: 1.3rem;
+    }
+
+    .navbar-nav {
+      .nav-link {
+        font-size: 0.9rem;
+      }
+
+      .btn {
+        padding: 6px 15px;
+        font-size: 0.9rem;
+      }
     }
   }
 }

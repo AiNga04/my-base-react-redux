@@ -14,7 +14,6 @@ import { ToastContainer } from "react-toastify";
 import Quiz from "./pages/User/Quiz";
 import QuizDetail from "./pages/User/QuizDetail";
 import NotFound from "./layouts/NotFound/NotFound";
-import ShowAnswer from "./pages/User/ShowAnswer";
 
 const Layout = () => {
   return (
@@ -27,7 +26,6 @@ const Layout = () => {
         </Route>
 
         <Route path="quiz/:id" element={<QuizDetail />} />
-        <Route path="answer/:id" element={<ShowAnswer />} />
 
         <Route path="admins" element={<Admin />}>
           <Route index element={<DashBoard />} />

@@ -1,22 +1,21 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import "./ModalResult.scss";
-import { useNavigate } from "react-router";
+import ModalShowResult from "./ModalShowResult";
+import { useState } from "react";
 
 const ModalResult = (props) => {
-  const { show, setShow, dataModalResult, quizId } = props;
-  const navigate = useNavigate();
+  const { show, setShow, dataModalResult } = props;
+  const [isShowModalShowResult, setIsShowModalShowResult] = useState(false);
 
   const handleClickClose = () => {
+    setIsShowModalShowResult(true);
     handleClose();
-    navigate(`/answer/${quizId}`);
   };
 
   const handleClose = () => {
     setShow(false);
   };
-
-  console.log("data", dataModalResult);
 
   return (
     <>
@@ -48,6 +47,11 @@ const ModalResult = (props) => {
           </Button>
         </Modal.Footer>
       </Modal>
+      <ModalShowResult
+        show={isShowModalShowResult}
+        setShow={setIsShowModalShowResult}
+        dataModalResult={dataModalResult}
+      />
     </>
   );
 };

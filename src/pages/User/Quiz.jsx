@@ -40,7 +40,9 @@ const Quiz = () => {
                   variant="primary"
                   onClick={() => {
                     navigate(`/quiz/${quiz.id}`, {
-                      state: { QuizTitle: quiz.description },
+                      state: {
+                        QuizTitle: quiz.description,
+                      },
                     });
                   }}
                 >

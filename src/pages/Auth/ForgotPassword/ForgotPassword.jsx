@@ -63,7 +63,7 @@ const ForgotPassword = () => {
                 <div className="invalid-feedback">{errors.email}</div>
               )}
             </div>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn">
               Reset Password
             </button>
             <div>

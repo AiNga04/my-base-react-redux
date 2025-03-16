@@ -6,7 +6,7 @@ import ModalUpdateUser from "./ModalUpdateUser";
 import ModalViewUser from "./ModalViewUser";
 import ModalDeleteUser from "./ModalDeleteUser";
 import TableUserPaginate from "./TableUserPaginate";
-import { getUserWithPaginate } from "../../../services/api/UserService";
+import { getUserWithPaginate } from "../../../../services/api/UserService";
 import "./ManageUser.scss";
 import { FaUserPlus } from "react-icons/fa6";
 

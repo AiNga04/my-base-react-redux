@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Col from "react-bootstrap/Col";
@@ -6,67 +6,45 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import "./ModalCreateUser.scss";
 import { toast } from "react-toastify";
-import { postCreateNewUser } from "../../../services/api/UserService";
+import { getUpdateUser } from "../../../../services/api/UserService";
+import _ from "lodash";
 
-function ModalCreateUser(props) {
+function ModalUpdateUser(props) {
   const {
     show,
     handleClose,
     fetchUserListWithPaginate,
-    setCurrentPage,
+    dataUpdate,
+    reserUpdateUser,
+    currentPage,
     LIMIT_USER_LIST,
   } = props;
 
   const handleClickClose = () => {
     setEmail("");
     setUsername("");
-    setPassword("");
-    setConfirmPassword("");
     setRole("USER");
     setImage(null);
     setImagePreview(null);
-    setErrors({});
     handleClose();
+    setErrors({});
+    reserUpdateUser();
   };
 
+  const [id, setId] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [role, setRole] = useState("USER");
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
   const [errors, setErrors] = useState({});
 
-  const validateEmail = (email) => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
-
   const validateField = (name, value) => {
     let error = "";
     switch (name) {
-      case "email":
-        if (!validateEmail(value)) {
-          error = "Invalid email format";
-        }
-        break;
       case "username":
         if (!value) {
           error = "Username is required";
-        }
-        break;
-      case "password":
-        if (!value) {
-          error = "Password is required";
-        }
-        break;
-      case "confirmPassword":
-        if (value !== password) {
-          error = "Passwords do not match";
         }
         break;
       default:
@@ -80,6 +58,18 @@ function ModalCreateUser(props) {
     validateField(name, value);
   };
 
+  useEffect(() => {
+    if (!_.isEmpty(dataUpdate)) {
+      setId(dataUpdate.id);
+      setEmail(dataUpdate.email);
+      setUsername(dataUpdate.username);
+      setRole(dataUpdate.role);
+      if (dataUpdate.image) {
+        setImagePreview(`data:image/jpeg;base64,${dataUpdate.image}`);
+      }
+    }
+  }, [dataUpdate]);
+
   const handleChangeImage = (e) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
@@ -89,36 +79,18 @@ function ModalCreateUser(props) {
   };
 
   const handleSubmitUser = async () => {
-    if (!validateEmail(email)) {
-      toast.error("Invalid email format");
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      toast.error("Passwords do not match");
-      return;
-    }
-
     const formData = new FormData();
-    formData.append("email", email);
-    formData.append("password", password);
+    formData.append("id", id);
     formData.append("username", username);
     formData.append("role", role);
     formData.append("userImage", image);
 
     try {
-      const data = await postCreateNewUser(
-        email,
-        password,
-        username,
-        role,
-        image
-      );
+      const data = await getUpdateUser(id, username, role, image);
       if (data && data.EC === 0) toast.success(data.EM);
       console.log(data);
       if (data && data.EC !== 0) toast.error(data.EM);
-      setCurrentPage(1);
-      fetchUserListWithPaginate(1, LIMIT_USER_LIST);
+      fetchUserListWithPaginate(currentPage, LIMIT_USER_LIST);
       handleClickClose();
     } catch (error) {
       console.error("Error creating user:", error);
@@ -134,7 +106,7 @@ function ModalCreateUser(props) {
         backdrop="static"
       >
         <Modal.Header closeButton>
-          <Modal.Title>Add New User</Modal.Title>
+          <Modal.Title>Update A User</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form noValidate>
@@ -145,6 +117,7 @@ function ModalCreateUser(props) {
                   required
                   type="email"
                   placeholder="abc@example.com"
+                  disabled
                   value={email}
                   name="email"
                   onChange={(e) => setEmail(e.target.value)}
@@ -171,42 +144,6 @@ function ModalCreateUser(props) {
                 />
                 <Form.Control.Feedback type="invalid">
                   {errors.username}
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Row>
-            <Row className="mb-3">
-              <Form.Group as={Col} md="12" controlId="validationCustom03">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  required
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  name="password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  onBlur={handleBlur}
-                  isInvalid={!!errors.password}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {errors.password}
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Row>
-            <Row className="mb-3">
-              <Form.Group as={Col} md="12" controlId="validationCustom04">
-                <Form.Label>Confirm Password</Form.Label>
-                <Form.Control
-                  required
-                  type="password"
-                  placeholder="Confirm password"
-                  value={confirmPassword}
-                  name="confirmPassword"
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  onBlur={handleBlur}
-                  isInvalid={!!errors.confirmPassword}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {errors.confirmPassword}
                 </Form.Control.Feedback>
               </Form.Group>
             </Row>
@@ -269,4 +206,4 @@ function ModalCreateUser(props) {
   );
 }
 
-export default ModalCreateUser;
+export default ModalUpdateUser;

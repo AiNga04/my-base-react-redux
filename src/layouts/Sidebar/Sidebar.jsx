@@ -50,12 +50,15 @@ const Sidebar = (props) => {
           <SubMenu label="Quizzes" icon={<FaQuestionCircle />}>
             <MenuItem> General Knowledge </MenuItem>
             <MenuItem>
-              {" "}
               <NavLink className="nav-link" to="/admins/manage-users">
                 Manage User
               </NavLink>
             </MenuItem>
-            <MenuItem> Science </MenuItem>
+            <MenuItem>
+              <NavLink className="nav-link" to="/admins/manage-quizzes">
+                Manage Quiz
+              </NavLink>
+            </MenuItem>
             <MenuItem> History </MenuItem>
             <MenuItem> Sports </MenuItem>
           </SubMenu>

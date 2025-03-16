@@ -1,7 +1,7 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
 
-const TableUser = (props) => {
+const TableQuiz = (props) => {
   const {
     listUsers,
     handleShowUpdateModal,
@@ -15,9 +15,9 @@ const TableUser = (props) => {
         <thead>
           <tr>
             <th>No</th>
-            <th>Email</th>
-            <th>Username</th>
-            <th>Role</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Difficulty</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -67,4 +67,4 @@ const TableUser = (props) => {
   );
 };
 
-export default TableUser;
+export default TableQuiz;

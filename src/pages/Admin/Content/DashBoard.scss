@@ -1,0 +1,345 @@
+.dashboard-container {
+  display: flex;
+  width: 100%;
+  background: #2c3e50;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1e90ff, #87ceeb);
+    opacity: 0.7;
+    z-index: 0;
+    animation: rotateBackground 15s linear infinite;
+  }
+
+  .dashboard-sidebar {
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.15);
+    transition: width 0.3s ease;
+    z-index: 10;
+    width: 250px;
+
+    &.collapsed {
+      width: 80px;
+    }
+  }
+
+  .dashboard-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    overflow-y: auto;
+    z-index: 2;
+
+    .dashboard-header {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      padding: 15px 20px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+
+      svg {
+        font-size: 1.8rem;
+        color: #ffffff;
+        cursor: pointer;
+        transition: color 0.3s ease, transform 0.3s ease;
+
+        &:hover {
+          color: #1e90ff;
+          transform: rotate(90deg);
+        }
+      }
+
+      h1 {
+        font-size: 2rem;
+        color: #ffffff;
+        margin-left: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+    }
+
+    .dashboard-main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+
+      .section {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(12px);
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: translateY(-5px);
+        }
+
+        .section-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 20px;
+
+          h2 {
+            font-size: 1.5rem;
+            color: #ffffff;
+            font-weight: 600;
+          }
+
+          .view-all {
+            font-size: 1rem;
+            color: #1e90ff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+
+            &:hover {
+              color: #87ceeb;
+            }
+          }
+        }
+      }
+
+      .recent-quizzes {
+        grid-row: span 2;
+
+        .quiz-item {
+          margin-bottom: 20px;
+          padding: 15px;
+          background: rgba(255, 255, 255, 0.08);
+          border-radius: 8px;
+          border: 1px solid rgba(255, 255, 255, 0.15);
+
+          h3 {
+            font-size: 1.2rem;
+            color: #f0f4f8;
+            margin-bottom: 5px;
+          }
+
+          p {
+            font-size: 0.9rem;
+            color: #c0c8d1;
+            margin-bottom: 10px;
+          }
+
+          .progress-bar {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 5px;
+            height: 8px;
+            overflow: hidden;
+
+            .progress {
+              background: #1e90ff;
+              height: 100%;
+              transition: width 0.3s ease;
+            }
+          }
+
+          p:last-child {
+            margin-top: 5px;
+            font-size: 0.9rem;
+            color: #f0f4f8;
+          }
+        }
+      }
+
+      .activity-feed {
+        grid-row: span 2;
+
+        .feed-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px;
+          margin-bottom: 10px;
+          background: rgba(255, 255, 255, 0.08);
+          border-radius: 8px;
+          border: 1px solid rgba(255, 255, 255, 0.15);
+
+          p {
+            font-size: 1rem;
+            color: #f0f4f8;
+            margin: 0;
+
+            span {
+              color: #1e90ff;
+              font-weight: 500;
+            }
+          }
+
+          .time {
+            font-size: 0.9rem;
+            color: #c0c8d1;
+          }
+        }
+      }
+
+      .resources {
+        grid-column: span 2;
+        display: flex;
+        gap: 20px;
+
+        .resource-item {
+          flex: 1;
+          padding: 15px;
+          background: rgba(255, 255, 255, 0.08);
+          border-radius: 8px;
+          border: 1px solid rgba(255, 255, 255, 0.15);
+
+          h3 {
+            font-size: 1.2rem;
+            color: #f0f4f8;
+            margin-bottom: 5px;
+          }
+
+          p {
+            font-size: 0.9rem;
+            color: #c0c8d1;
+            margin-bottom: 10px;
+          }
+
+          .open-link {
+            font-size: 1rem;
+            color: #1e90ff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+
+            &:hover {
+              color: #87ceeb;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Animation cho nền */
+@keyframes rotateBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .dashboard-container {
+    .dashboard-content {
+      .dashboard-main {
+        grid-template-columns: 1fr;
+
+        .recent-quizzes,
+        .activity-feed {
+          grid-row: auto;
+        }
+
+        .resources {
+          grid-column: auto;
+          flex-direction: column;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+
+    .dashboard-sidebar {
+      width: 100%;
+      height: auto;
+
+      &.collapsed {
+        height: 60px;
+      }
+    }
+
+    .dashboard-content {
+      padding: 15px;
+
+      .dashboard-header {
+        padding: 10px 15px;
+
+        h1 {
+          font-size: 1.5rem;
+        }
+
+        svg {
+          font-size: 1.5rem;
+        }
+      }
+
+      .dashboard-main {
+        .section {
+          padding: 15px;
+
+          .section-header {
+            h2 {
+              font-size: 1.3rem;
+            }
+
+            .view-all {
+              font-size: 0.9rem;
+            }
+          }
+        }
+
+        .recent-quizzes .quiz-item {
+          padding: 10px;
+
+          h3 {
+            font-size: 1rem;
+          }
+
+          p {
+            font-size: 0.8rem;
+          }
+        }
+
+        .activity-feed .feed-item {
+          padding: 8px;
+
+          p {
+            font-size: 0.9rem;
+          }
+
+          .time {
+            font-size: 0.8rem;
+          }
+        }
+
+        .resources .resource-item {
+          padding: 10px;
+
+          h3 {
+            font-size: 1rem;
+          }
+
+          p {
+            font-size: 0.8rem;
+          }
+
+          .open-link {
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+  }
+}

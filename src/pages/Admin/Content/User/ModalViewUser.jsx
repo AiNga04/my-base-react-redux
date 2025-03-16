@@ -43,7 +43,7 @@ function ModalViewUser(props) {
         backdrop="static"
       >
         <Modal.Header closeButton>
-          <Modal.Title>Update A User</Modal.Title>
+          <Modal.Title>View A User</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form noValidate>

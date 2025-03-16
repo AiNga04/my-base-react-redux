@@ -1,0 +1,259 @@
+.modal-content {
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  background: #ffffff;
+}
+
+.modal-header {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border-bottom: none;
+  padding: 20px 25px;
+  border-radius: 12px 12px 0 0;
+
+  .modal-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2c3e50;
+    background: linear-gradient(90deg, #3498db, #2980b9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.modal-body {
+  padding: 25px;
+  background: #f8f9fa;
+
+  .form-group {
+    margin-bottom: 20px;
+
+    .form-label {
+      font-size: 1.1rem;
+      color: #34495e;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .form-control {
+      border-radius: 8px;
+      padding: 10px 15px;
+      font-size: 1rem;
+      border: 1px solid #dee2e6;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+      &:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+        outline: none;
+      }
+
+      &.is-invalid {
+        border-color: #dc3545;
+      }
+    }
+
+    .form-control-feedback {
+      font-size: 0.9rem;
+      margin-top: 5px;
+    }
+
+    &.invalid-feedback {
+      color: #dc3545;
+    }
+  }
+
+  .difficulty {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #34495e;
+    background: #ffffff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+    &:focus {
+      border-color: #3498db;
+      box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+      outline: none;
+    }
+  }
+
+  .image-preview {
+    padding: 10px 15px;
+
+    .preview-desc {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 150px;
+      border: 2px dashed #e9ecef;
+      color: #7f8c8d;
+      border-radius: 8px;
+      background: #ffffff;
+      transition: border-color 0.3s ease;
+
+      &:hover {
+        border-color: #3498db;
+      }
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 8px;
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+}
+
+.modal-footer {
+  padding: 20px 25px;
+  border-top: none;
+  background: #ffffff;
+  border-radius: 0 0 12px 12px;
+  display: flex;
+  gap: 15px;
+
+  .btn-secondary {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #6c757d, #5a6268);
+    border: none;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+      background: linear-gradient(45deg, #5a6268, #4b5359);
+    }
+  }
+
+  .btn-primary {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #3498db, #2980b9);
+    border: none;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+      background: linear-gradient(45deg, #2980b9, #2471a3);
+    }
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .modal-header {
+    padding: 15px 20px;
+
+    .modal-title {
+      font-size: 1.5rem;
+    }
+  }
+
+  .modal-body {
+    padding: 20px;
+
+    .form-group {
+      margin-bottom: 15px;
+
+      .form-label {
+        font-size: 1rem;
+      }
+
+      .form-control {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+      }
+
+      .role {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+      }
+
+      .image-preview {
+        padding: 8px 12px;
+
+        .preview-desc {
+          height: 120px;
+        }
+      }
+    }
+  }
+
+  .modal-footer {
+    padding: 15px 20px;
+    flex-direction: column;
+    gap: 10px;
+
+    .btn-secondary,
+    .btn-primary {
+      padding: 8px 15px;
+      font-size: 0.9rem;
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .modal-header {
+    padding: 10px 15px;
+
+    .modal-title {
+      font-size: 1.3rem;
+    }
+  }
+
+  .modal-body {
+    padding: 15px;
+
+    .form-group {
+      margin-bottom: 10px;
+
+      .form-label {
+        font-size: 0.9rem;
+      }
+
+      .form-control {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+      }
+
+      .role {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+      }
+
+      .image-preview {
+        padding: 6px 10px;
+
+        .preview-desc {
+          height: 100px;
+        }
+      }
+    }
+  }
+
+  .modal-footer {
+    padding: 10px 15px;
+
+    .btn-secondary,
+    .btn-primary {
+      padding: 6px 12px;
+      font-size: 0.8rem;
+    }
+  }
+}

@@ -25,7 +25,7 @@ const Home = (props) => {
             <button
               className="btn btn-start-quiz"
               onClick={() => {
-                navigate("/users");
+                navigate("/users/quiz");
               }}
             >
               Start Quiz

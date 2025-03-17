@@ -15,6 +15,9 @@ import Quiz from "./pages/User/Quiz";
 import QuizDetail from "./pages/User/QuizDetail";
 import NotFound from "./layouts/NotFound/NotFound";
 import ManageQuiz from "./pages/Admin/Content/Quiz/ManageQuiz";
+import ManageQuestion from "./pages/Admin/Content/Question/ManageQuestion";
+import Profile from "./pages/User/Profile";
+import User from "./pages/User/User";
 
 const Layout = () => {
   return (
@@ -22,7 +25,6 @@ const Layout = () => {
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<Home />} />
-          <Route path="users" element={<Quiz />} />
           <Route path="abouts" element={<About />} />
         </Route>
 
@@ -32,6 +34,13 @@ const Layout = () => {
           <Route index element={<DashBoard />} />
           <Route path="manage-users" element={<ManageUser />} />
           <Route path="manage-quizzes" element={<ManageQuiz />} />
+          <Route path="manage-questions" element={<ManageQuestion />} />
+        </Route>
+
+        <Route path="users" element={<User />}>
+          <Route index element={<DashBoard />} />
+          <Route path="quiz" element={<Quiz />} />
+          <Route path="profile" element={<Profile />} />
         </Route>
 
         <Route path="auth/login" element={<Login />} />

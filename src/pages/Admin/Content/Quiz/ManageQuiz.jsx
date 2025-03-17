@@ -60,7 +60,7 @@ const ManageQuiz = () => {
     fetchQuizListWithPaginate(1);
   }, []);
 
-  const fetchQuizListWithPaginate = async (index) => {
+  const fetchQuizListWithPaginate = async () => {
     try {
       const data = await getListQuiz();
       setListQuizzes(data.DT);

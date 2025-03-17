@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useSelector } from "react-redux";
 import _ from "lodash";
 import "./ModalShowResult.scss";
+import { useNavigate } from "react-router-dom";
 
 const ModalShowResult = (props) => {
   const { show, setShow, dataModalResult } = props;
   const listData = useSelector((state) => state.quiz.listData);
   const [quiz, setQuiz] = useState([]);
+  const navigate = useNavigate();
 
   const handleClickClose = () => {
+    navigate("/users/quiz");
     handleClose();
   };
 
@@ -23,7 +25,7 @@ const ModalShowResult = (props) => {
       let listResult = dataModalResult.quizData;
       let ans = [];
       let ansTrue = [];
-      listResult.map((quiz) => {
+      listResult.forEach((quiz) => {
         ans.push(quiz.userAnswers);
         ansTrue.push(quiz.systemAnswers[0].id);
       });

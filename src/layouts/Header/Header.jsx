@@ -58,8 +58,16 @@ function Header() {
               </>
             ) : (
               <NavDropdown title="Setting" id="basic-nav-dropdown">
-                <NavDropdown.Item>Log out</NavDropdown.Item>
-                <NavDropdown.Item>Profile</NavDropdown.Item>
+                <NavDropdown.Item>
+                  <NavLink className="nav-link" to="/auth/login">
+                    Logout
+                  </NavLink>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <NavLink className="nav-link" to="/users/profile">
+                    Profile
+                  </NavLink>
+                </NavDropdown.Item>
               </NavDropdown>
             )}
           </Nav>

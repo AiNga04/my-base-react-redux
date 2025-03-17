@@ -59,10 +59,20 @@ const Sidebar = (props) => {
                 Manage Quiz
               </NavLink>
             </MenuItem>
+            <MenuItem>
+              <NavLink className="nav-link" to="/admins/manage-questions">
+                Manage Questions
+              </NavLink>
+            </MenuItem>
             <MenuItem> History </MenuItem>
             <MenuItem> Sports </MenuItem>
           </SubMenu>
-          <MenuItem icon={<FaUser />}> Profile </MenuItem>
+          <MenuItem icon={<FaUser />}>
+            {" "}
+            <NavLink className="nav-link" to="/users/profile">
+              Profile
+            </NavLink>{" "}
+          </MenuItem>
           <MenuItem icon={<FaCog />}> Settings </MenuItem>
           <MenuItem icon={<FaSignOutAlt />}> Logout </MenuItem>
         </Menu>

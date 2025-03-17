@@ -1,7 +1,14 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
+import Header from "../../layouts/Header/Header";
 
 const User = () => {
-  return <h1>Welcome to the User Page!</h1>;
+  return (
+    <div className="user-container">
+      <Header />
+      <Outlet />
+    </div>
+  );
 };
 
 export default User;

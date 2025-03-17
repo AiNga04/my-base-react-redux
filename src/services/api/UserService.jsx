@@ -29,10 +29,15 @@ const getUserWithPaginate = (page, limit) => {
   return axios.get(`api/v1/participant?page=${page}&limit=${limit}`);
 };
 
+const updateProfile = (username, userImage) => {
+  return axios.post(`api/v1/profile`);
+};
+
 export {
   postCreateNewUser,
   getListUsers,
   getUpdateUser,
   deleteUserById,
   getUserWithPaginate,
+  updateProfile,
 };

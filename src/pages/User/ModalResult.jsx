@@ -3,12 +3,19 @@ import Modal from "react-bootstrap/Modal";
 import "./ModalResult.scss";
 import ModalShowResult from "./ModalShowResult";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ModalResult = (props) => {
   const { show, setShow, dataModalResult } = props;
   const [isShowModalShowResult, setIsShowModalShowResult] = useState(false);
+  const navigate = useNavigate();
 
   const handleClickClose = () => {
+    navigate("/users/quiz");
+    handleClose();
+  };
+
+  const handleClickShow = () => {
     setIsShowModalShowResult(true);
     handleClose();
   };
@@ -16,6 +23,8 @@ const ModalResult = (props) => {
   const handleClose = () => {
     setShow(false);
   };
+
+  console.log("dataModalResult", dataModalResult);
 
   return (
     <>
@@ -39,7 +48,7 @@ const ModalResult = (props) => {
           </p>
         </Modal.Body>
         <Modal.Footer className="modal-footer">
-          <Button variant="secondary" onClick={handleClickClose}>
+          <Button variant="secondary" onClick={handleClickShow}>
             Show answer
           </Button>
           <Button variant="danger" onClick={handleClickClose}>

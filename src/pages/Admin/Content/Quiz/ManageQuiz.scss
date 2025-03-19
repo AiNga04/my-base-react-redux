@@ -2,9 +2,7 @@
   width: 100%;
   padding: 20px;
   background: #f0f2f5;
-  min-height: calc(
-    100vh - 80px
-  ); /* Điều chỉnh dựa trên chiều cao header/footer nếu có */
+  min-height: calc(100vh - 80px);
 
   .admin-main {
     background: #ffffff;
@@ -44,6 +42,7 @@
         transition: transform 0.3s ease, box-shadow 0.3s ease;
 
         &:hover {
+          transform: translateY(-2px);
           box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
           background: linear-gradient(45deg, #2980b9, #2471a3);
         }
@@ -72,8 +71,12 @@
           background: #f8f9fa;
           color: #34495e;
           font-weight: 600;
-          border-top-left-radius: 8px;
-          border-top-right-radius: 8px;
+          &:first-child {
+            border-top-left-radius: 8px;
+          }
+          &:last-child {
+            border-top-right-radius: 8px;
+          }
         }
 
         td {
@@ -82,27 +85,33 @@
 
         tr {
           transition: background 0.3s ease;
-
           &:hover {
             background: #e9ecef;
           }
-
           &:nth-child(even) {
             background: #f8f9fa;
           }
         }
       }
 
-      .btn-delete {
+      .btn-delete,
+      .btn-update,
+      .btn-view {
         padding: 8px 15px;
-        background: linear-gradient(45deg, #dc3545, #a51008);
-        color: #ffffff;
         border: none;
         border-radius: 6px;
         cursor: pointer;
         font-weight: 600;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
 
+        &:hover {
+          transform: translateY(-2px);
+        }
+      }
+
+      .btn-delete {
+        background: linear-gradient(45deg, #dc3545, #a51008);
+        color: #ffffff;
         &:hover {
           box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
           background: linear-gradient(45deg, #a51008, #841111);
@@ -110,15 +119,8 @@
       }
 
       .btn-update {
-        padding: 8px 15px;
         background: linear-gradient(45deg, #ffc107, #c5a137);
         color: #000000;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        font-weight: 600;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-
         &:hover {
           box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
           background: linear-gradient(45deg, #c5a137, #a68a3b);
@@ -126,15 +128,8 @@
       }
 
       .btn-view {
-        padding: 8px 15px;
         background: linear-gradient(45deg, #0dcaf0, #0298b7);
         color: #ffffff;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        font-weight: 600;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-
         &:hover {
           box-shadow: 0 4px 12px rgba(13, 202, 240, 0.3);
           background: linear-gradient(45deg, #0298b7, #027d95);
@@ -179,6 +174,92 @@
   }
 }
 
+.assign-container {
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin-top: 20px;
+
+  .assign-top {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .select-quiz,
+    .select-user {
+      flex: 1;
+      min-width: 250px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      border: 1px solid #e9ecef;
+      padding: 15px;
+      position: relative;
+      transition: all 0.3s ease;
+
+      &:hover {
+        border-color: #3498db;
+        box-shadow: 0 2px 10px rgba(52, 152, 219, 0.1);
+      }
+
+      label {
+        font-size: 1.1rem;
+        color: #34495e;
+        font-weight: 500;
+        margin-bottom: 8px;
+        display: block;
+      }
+
+      select {
+        width: 100%;
+        padding: 10px 30px 10px 12px;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        background: #ffffff;
+        color: #2d3436;
+        font-size: 1rem;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+        &:focus {
+          border-color: #3498db;
+          box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+          outline: none;
+        }
+      }
+    }
+  }
+
+  .assign-footer {
+    text-align: right;
+    margin-top: 30px;
+
+    .btn.btn-warning {
+      padding: 12px 25px;
+      background: linear-gradient(45deg, #ffc107, #e0a800);
+      color: #000000;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(255, 193, 7, 0.4);
+        background: linear-gradient(45deg, #e0a800, #c69500);
+      }
+
+      &:disabled {
+        background: #cccccc;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+    }
+  }
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .admin-content {
@@ -204,7 +285,6 @@
             font-size: 0.9rem;
           }
         }
-
         .btn-delete,
         .btn-update,
         .btn-view {
@@ -215,12 +295,30 @@
 
       .user-pagination {
         padding: 10px;
-
         .page-item .page-link {
           padding: 6px 10px;
           font-size: 0.9rem;
         }
       }
+    }
+  }
+
+  .assign-container {
+    padding: 15px;
+
+    .assign-top {
+      flex-direction: column;
+      gap: 15px;
+
+      .select-quiz,
+      .select-user {
+        min-width: 100%;
+      }
+    }
+
+    .assign-footer {
+      margin-top: 20px;
+      text-align: center;
     }
   }
 }
@@ -244,7 +342,6 @@
             font-size: 0.8rem;
           }
         }
-
         .btn-delete,
         .btn-update,
         .btn-view {
@@ -255,11 +352,42 @@
 
       .user-pagination {
         padding: 8px;
-
         .page-item .page-link {
           padding: 5px 8px;
           font-size: 0.8rem;
         }
+      }
+    }
+  }
+
+  .assign-container {
+    padding: 10px;
+
+    .assign-top {
+      .select-quiz,
+      .select-user {
+        padding: 10px;
+
+        label {
+          font-size: 1rem;
+        }
+
+        select {
+          font-size: 0.9rem;
+          padding: 8px 25px 8px 10px;
+        }
+
+        .error {
+          font-size: 0.8rem;
+          bottom: -20px;
+        }
+      }
+    }
+
+    .assign-footer {
+      .btn.btn-warning {
+        padding: 10px 20px;
+        font-size: 0.9rem;
       }
     }
   }

@@ -3,7 +3,7 @@ import { CiCircleRemove } from "react-icons/ci";
 import { v4 as uuidv4 } from "uuid";
 import ModalShowPreviewImage from "./ModalShowPreviewImage";
 import "./ManageQuestion.scss";
-import { getListQuiz } from "../../../../services/api/QuizService";
+import { getListQuiz, getQuizByQA } from "../../../../services/api/QuizService";
 import {
   postCreateQuestion,
   postCreateAnswer,
@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 const ManageQuestion = () => {
   const navigate = useNavigate();
-  const [quiz, setQuiz] = useState("Quiz");
+  const [quiz, setQuiz] = useState();
   const [questions, setQuestions] = useState([]);
   const [previewImages, setPreviewImages] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -55,6 +55,22 @@ const ManageQuestion = () => {
       setListQuiz(newQuiz);
     }
   };
+
+  useEffect(() => {
+    if (quiz) {
+      fetchQuizQA(quiz);
+    }
+  }, [quiz]);
+
+  const fetchQuizQA = async (id) => {
+    let res = await getQuizByQA(id);
+    if (res && res.EC === 0) {
+      console.log(res.DT.qa);
+      setQuestions(res.DT.qa);
+    }
+  };
+
+  console.log("questions", questions);
 
   // Thêm câu hỏi mới
   const handleAddQuestion = () => {
@@ -286,7 +302,7 @@ const ManageQuestion = () => {
   return (
     <div className="questions-container">
       <div className="questions-header">
-        <h1>Manage Question Page</h1>
+        <h1>Manage Update Question</h1>
       </div>
       <div className="questions-content">
         <div className="header">

@@ -38,6 +38,17 @@ const deleteQuizById = (quizId) => {
   return axios.delete(`api/v1/quiz/${quizId}`);
 };
 
+const postAssignQuizToUser = (quizId, userId) => {
+  return axios.post("api/v1/quiz-assign-to-user", {
+    quizId,
+    userId,
+  });
+};
+
+const getQuizByQA = (qApiId) => {
+  return axios.get(`api/v1/quiz-with-qa/${qApiId}`);
+};
+
 export {
   getQuizByUser,
   getQuizById,
@@ -46,4 +57,6 @@ export {
   postCreateNewQuiz,
   getUpdateQuiz,
   deleteQuizById,
+  postAssignQuizToUser,
+  getQuizByQA,
 };

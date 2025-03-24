@@ -49,6 +49,10 @@ const getQuizByQA = (qApiId) => {
   return axios.get(`api/v1/quiz-with-qa/${qApiId}`);
 };
 
+const postUpsertQA = (data) => {
+  return axios.post(`api/v1/quiz-upsert-qa`, { ...data });
+};
+
 export {
   getQuizByUser,
   getQuizById,
@@ -59,4 +63,5 @@ export {
   deleteQuizById,
   postAssignQuizToUser,
   getQuizByQA,
+  postUpsertQA,
 };

@@ -24,8 +24,6 @@ const ModalResult = (props) => {
     setShow(false);
   };
 
-  console.log("dataModalResult", dataModalResult);
-
   return (
     <>
       <Modal show={show} onHide={handleClickClose}>

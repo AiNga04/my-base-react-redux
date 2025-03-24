@@ -3,13 +3,14 @@ import { CiCircleRemove } from "react-icons/ci";
 import { v4 as uuidv4 } from "uuid";
 import ModalShowPreviewImage from "./ModalShowPreviewImage";
 import "./ManageQuestion.scss";
-import { getListQuiz, getQuizByQA } from "../../../../services/api/QuizService";
 import {
-  postCreateQuestion,
-  postCreateAnswer,
-} from "../../../../services/api/QuestionService";
+  getListQuiz,
+  getQuizByQA,
+  postUpsertQA,
+} from "../../../../services/api/QuizService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import _ from "lodash";
 
 const ManageQuestion = () => {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ const ManageQuestion = () => {
         description: "",
         imageFile: null,
         imageName: "",
-        answer: [
+        answers: [
           {
             id: uuidv4(),
             description: "",
@@ -65,7 +66,6 @@ const ManageQuestion = () => {
   const fetchQuizQA = async (id) => {
     let res = await getQuizByQA(id);
     if (res && res.EC === 0) {
-      console.log(res.DT.qa);
       setQuestions(res.DT.qa);
     }
   };
@@ -79,7 +79,7 @@ const ManageQuestion = () => {
       description: "",
       imageFile: null,
       imageName: "",
-      answer: [
+      answers: [
         {
           id: uuidv4(),
           description: "",
@@ -106,8 +106,8 @@ const ManageQuestion = () => {
       if (question.id === questionId) {
         return {
           ...question,
-          answer: [
-            ...question.answer,
+          answers: [
+            ...question.answers,
             { id: uuidv4(), description: "", isCorrect: false },
           ],
         };
@@ -123,7 +123,7 @@ const ManageQuestion = () => {
       if (question.id === questionId) {
         return {
           ...question,
-          answer: question.answer.filter((a) => a.id !== answerId),
+          answers: question.answers.filter((a) => a.id !== answerId),
         };
       }
       return question;
@@ -145,7 +145,7 @@ const ManageQuestion = () => {
       if (question.id === questionId) {
         return {
           ...question,
-          answer: question.answer.map((answer) =>
+          answers: question.answers.map((answer) =>
             answer.id === answerId ? { ...answer, [field]: value } : answer
           ),
         };
@@ -180,7 +180,7 @@ const ManageQuestion = () => {
       if (question.id === questionId) {
         return {
           ...question,
-          answer: question.answer.map((answer) => ({
+          answers: question.answers.map((answer) => ({
             ...answer,
             isCorrect: answer.id === answerId,
           })),
@@ -245,7 +245,7 @@ const ManageQuestion = () => {
         errors[`question-${qIndex}`] = "Question description is required";
       }
 
-      question.answer.forEach((answer, aIndex) => {
+      question.answers.forEach((answer, aIndex) => {
         if (!answer.description) {
           isValid = false;
           errors[`answer-${qIndex}-${aIndex}`] =
@@ -258,44 +258,52 @@ const ManageQuestion = () => {
     return isValid;
   };
 
-  const handleSubmitQuestion = async (question) => {
+  const handleSubmitQuestion = async (questions) => {
     if (!validateQuestions()) {
       toast.error("Please fill in all required fields");
       return;
     }
 
-    let isTrue = false;
+    const toBase64 = (file) =>
+      new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          const base64String = reader.result.split(",")[1];
+          resolve(base64String);
+        };
+        reader.onerror = reject;
+      });
 
-    await Promise.all(
-      question.map(async (question) => {
-        const q = await postCreateQuestion(
-          +quiz,
-          question.description,
-          question.imageFile
+    let questionsClone = _.cloneDeep(questions);
+    for (let i = 0; i < questionsClone.length; i++) {
+      if (
+        questionsClone[i].imageFile &&
+        questionsClone[i].imageFile instanceof Blob
+      ) {
+        questionsClone[i].imageFile = await toBase64(
+          questionsClone[i].imageFile
         );
+      }
+    }
 
-        await Promise.all(
-          question.answer.map(async (answer) => {
-            const a = await postCreateAnswer(
-              answer.description,
-              answer.isCorrect,
-              q.DT.id
-            );
-            if (a.EC === 0) {
-              isTrue = true;
-            } else {
-              isTrue = false;
-            }
-          })
-        );
-      })
-    );
+    try {
+      const res = await postUpsertQA({
+        quizId: quiz,
+        questions: questionsClone,
+      });
 
-    if (isTrue) {
-      navigate(`/quiz/${quiz}`);
-      toast.success("Create questions successfully!");
-    } else {
-      toast.error("Failed to create questions");
+      console.log("Response from server:", res);
+
+      if (res && res.EC === 0) {
+        toast.success("Update question successfully");
+        navigate("/admin/manage-quiz");
+      } else {
+        toast.error("Update question failed");
+      }
+    } catch (error) {
+      console.error("Error updating question:", error);
+      toast.error("Update question failed");
     }
   };
 
@@ -370,7 +378,18 @@ const ManageQuestion = () => {
                       style={{ cursor: "pointer" }}
                     />
                   ) : (
-                    <span className="preview-placeholder">Preview Image</span>
+                    <img
+                      // src={previewImages[question.id]}
+                      src={`data:image/jpeg;base64,${question.imageFile}`}
+                      alt="Preview"
+                      className="preview-image"
+                      onClick={() =>
+                        openModal(
+                          `data:image/jpeg;base64,${question.imageFile}`
+                        )
+                      }
+                      style={{ cursor: "pointer" }}
+                    />
                   )}
                 </div>
 
@@ -394,7 +413,7 @@ const ManageQuestion = () => {
 
               <div className="answers-section">
                 <h4>Answers</h4>
-                {question.answer.map((answer, aIndex) => (
+                {question.answers.map((answer, aIndex) => (
                   <div key={answer.id} className="answer-item">
                     <div className="answer-top">
                       <input

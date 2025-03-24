@@ -5,11 +5,14 @@ import { Routes, Route } from "react-router-dom";
 import Admin from "./pages/Admin/Admin";
 import About from "./pages/About/About";
 import Home from "./pages/Home/Home";
-import DashBoard from "./pages/Admin/Content/DashBoard";
+import DashBoard from "./pages/Admin/Content/Dashboard";
+import UserDashboard from "./pages/User/UserDashboard";
 import ManageUser from "./pages/Admin/Content/User/ManageUser";
 import Login from "./pages/Auth/Login/Login";
 import SignUp from "./pages/Auth/SignUp/SignUp";
+import ChangePassword from "./pages/Auth/ChangePassword/ChangePassword";
 import ForgotPassword from "./pages/Auth/ForgotPassword/ForgotPassword";
+import ResetPassword from "./pages/Auth/ResetPassword/ResetPassword";
 import { ToastContainer } from "react-toastify";
 import Quiz from "./pages/User/Quiz";
 import QuizDetail from "./pages/User/QuizDetail";
@@ -38,7 +41,7 @@ const Layout = () => {
         </Route>
 
         <Route path="users" element={<User />}>
-          <Route index element={<DashBoard />} />
+          <Route index element={<UserDashboard />} />
           <Route path="quiz" element={<Quiz />} />
           <Route path="profile" element={<Profile />} />
         </Route>
@@ -46,6 +49,8 @@ const Layout = () => {
         <Route path="auth/login" element={<Login />} />
         <Route path="auth/forgot-password" element={<ForgotPassword />} />
         <Route path="auth/sign-up" element={<SignUp />} />
+        <Route path="auth/change-password" element={<ChangePassword />} />
+        <Route path="auth/reset-password" element={<ResetPassword />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

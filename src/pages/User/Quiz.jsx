@@ -20,8 +20,6 @@ const Quiz = () => {
       console.error("Error fetching quiz list:", data.EM);
   };
 
-  console.log(listQuiz);
-
   return (
     <div className="quiz-container container">
       {listQuiz && listQuiz.length > 0 ? (

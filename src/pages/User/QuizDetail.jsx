@@ -19,6 +19,29 @@ const QuizDetail = () => {
   const [disableNext, setDisableNext] = useState(false);
   const [data, setData] = useState({});
   const [isShowModalResult, setIsShowModalResult] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(600); // 10 phút = 600 giây
+
+  // Countdown timer logic
+  useEffect(() => {
+    if (timeLeft <= 0) {
+      handleFinish();
+      return;
+    }
+
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => prev - 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [timeLeft]);
+
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes.toString().padStart(2, "0")}:${remainingSeconds
+      .toString()
+      .padStart(2, "0")}`;
+  };
 
   const getQuizByIdApi = useCallback(async () => {
     try {
@@ -116,6 +139,13 @@ const QuizDetail = () => {
     setQuiz(quizClone);
   };
 
+  // Navigation button handler
+  const handleQuestionSelect = (questionIndex) => {
+    setIndex(questionIndex);
+    setDisablePrev(questionIndex === 0);
+    setDisableNext(questionIndex === quiz.length - 1);
+  };
+
   return (
     <div className="container quiz-detail-container">
       <div className="row quiz-top">
@@ -157,7 +187,36 @@ const QuizDetail = () => {
             </div>
           )}
         </div>
-        <div className="quiz-right">Quiz right</div>
+        <div className="quiz-right">
+          <div className="quiz-right-top">
+            <div className="timer-container">
+              <span className="timer-label">Time Left:</span>
+              <span
+                className={`timer-value ${timeLeft <= 60 ? "warning" : ""}`}
+              >
+                {formatTime(timeLeft)}
+              </span>
+            </div>
+          </div>
+          <div className="quiz-right-content">
+            <h3>Questions</h3>
+            <div className="question-navigation">
+              {quiz.map((_, idx) => (
+                <button
+                  key={idx}
+                  className={`nav-button ${index === idx ? "active" : ""} ${
+                    quiz[idx].answers.some((ans) => ans.isSelected)
+                      ? "answered"
+                      : ""
+                  }`}
+                  onClick={() => handleQuestionSelect(idx)}
+                >
+                  {idx + 1}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
         <div className="quiz-footer">
           <div className="btn-footer">
             <button

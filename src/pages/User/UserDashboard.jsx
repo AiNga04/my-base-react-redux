@@ -84,13 +84,28 @@ const UserDashboard = () => {
             >
               <span>🎓</span> Start New Quiz
             </button>
-            <button className="action-button">
+            <button
+              className="action-button"
+              onClick={() => {
+                navigate("/users/view-progress");
+              }}
+            >
               <span>📊</span> View Progress
             </button>
-            <button className="action-button">
+            <button
+              className="action-button"
+              onClick={() => {
+                navigate("/users/leaderboard");
+              }}
+            >
               <span>🏆</span> Leaderboard
             </button>
-            <button className="action-button">
+            <button
+              className="action-button"
+              onClick={() => {
+                navigate("/users/settings");
+              }}
+            >
               <span>⚙️</span> Settings
             </button>
           </div>

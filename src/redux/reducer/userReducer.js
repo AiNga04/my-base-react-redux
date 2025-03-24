@@ -1,4 +1,5 @@
 import { LOGIN_SUCCESS, LOGIN_FAILURE } from "../action/userAction";
+import { LOGOUT_SUCCESS, LOGOUT_FAILURE } from "../action/userAction";
 const INITIAL_STATE = {
   account: {
     access_token: "",
@@ -27,6 +28,24 @@ const userReducer = (state = INITIAL_STATE, action) => {
       };
 
     case LOGIN_FAILURE:
+      return {
+        ...state,
+      };
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        account: {
+          access_token: "",
+          email: "",
+          image: "",
+          refresh_token: "",
+          role: "",
+          username: "",
+        },
+        isAuthenticated: false,
+      };
+
+    case LOGOUT_FAILURE:
       return {
         ...state,
       };

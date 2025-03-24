@@ -1,4 +1,3 @@
-// About.js
 import React from "react";
 import "./About.scss";
 
@@ -62,10 +61,6 @@ const About = () => {
           </div>
         </div>
       </section>
-
-      <footer className="about-footer">
-        <p>&copy; 2025 Your Company. All rights reserved.</p>
-      </footer>
     </div>
   );
 };

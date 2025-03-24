@@ -18,8 +18,28 @@ import {
   FaChartBar,
 } from "react-icons/fa";
 import { SiQuizlet } from "react-icons/si";
+import { useNavigate } from "react-router";
+import { useSelector, useDispatch } from "react-redux";
+import { userLogout } from "../../services/api/UserService";
+import { doLogout } from "../../redux/action/userAction";
+import { toast } from "react-toastify";
+
 const Sidebar = (props) => {
   const { collapsed, toggled, handleToggleSidebar } = props;
+  const navigate = useNavigate();
+  const account = useSelector((state) => state.user.account);
+  const dispatch = useDispatch();
+
+  const handleLogout = async () => {
+    const rs = await userLogout(account.email, account.refresh_token);
+    if (rs && rs.EC === 0) {
+      dispatch(doLogout());
+      navigate("/auth/login");
+      toast.success("Logged out successfully");
+    } else {
+      toast.error("Failed to logout");
+    }
+  };
   return (
     <ProSidebar
       image={bgSidebar}
@@ -48,7 +68,6 @@ const Sidebar = (props) => {
             </NavLink>
           </MenuItem>
           <SubMenu label="Quizzes" icon={<FaQuestionCircle />}>
-            <MenuItem> General Knowledge </MenuItem>
             <MenuItem>
               <NavLink className="nav-link" to="/admins/manage-users">
                 Manage User
@@ -64,8 +83,11 @@ const Sidebar = (props) => {
                 Manage Questions
               </NavLink>
             </MenuItem>
-            <MenuItem> History </MenuItem>
-            <MenuItem> Sports </MenuItem>
+            <MenuItem>
+              <NavLink className="nav-link" to="/admins/history">
+                History
+              </NavLink>
+            </MenuItem>
           </SubMenu>
           <MenuItem icon={<FaUser />}>
             {" "}
@@ -74,7 +96,15 @@ const Sidebar = (props) => {
             </NavLink>{" "}
           </MenuItem>
           <MenuItem icon={<FaCog />}> Settings </MenuItem>
-          <MenuItem icon={<FaSignOutAlt />}> Logout </MenuItem>
+          <MenuItem
+            icon={<FaSignOutAlt />}
+            onClick={() => {
+              handleLogout();
+            }}
+          >
+            {" "}
+            Logout{" "}
+          </MenuItem>
         </Menu>
       </div>
       <div className="sidebar-footer">

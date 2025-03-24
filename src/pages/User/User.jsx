@@ -5,7 +5,6 @@ import Header from "../../layouts/Header/Header";
 const User = () => {
   return (
     <div className="user-container">
-      <Header />
       <Outlet />
     </div>
   );

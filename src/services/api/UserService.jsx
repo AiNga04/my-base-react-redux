@@ -33,6 +33,13 @@ const updateProfile = (username, userImage) => {
   return axios.post(`api/v1/profile`);
 };
 
+const userLogout = (email, refresh_token) => {
+  return axios.post(`/api/v1/logout`, {
+    email: email,
+    refresh_token: refresh_token,
+  });
+};
+
 export {
   postCreateNewUser,
   getListUsers,
@@ -40,4 +47,5 @@ export {
   deleteUserById,
   getUserWithPaginate,
   updateProfile,
+  userLogout,
 };

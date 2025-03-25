@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Admin from "./pages/Admin/Admin";
 import About from "./pages/About/About";
 import Home from "./pages/Home/Home";
-import DashBoard from "./pages/Admin/Content/DashBoard";
+import DashBoard from "./pages/Admin/Content/Dashboard";
 import UserDashboard from "./pages/User/UserDashboard";
 import EditProfile from "./pages/User/EditProfile";
 import Leaderboard from "./pages/User/Leaderboard";

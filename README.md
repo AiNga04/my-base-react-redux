@@ -1,72 +1,86 @@
-#Node.js v14.17.0
+# Ứng dụng Quiz - My Base React Redux Project
 
-# Getting Started with Create React App
+Ứng dụng Quiz được xây dựng bằng React và Redux, cung cấp một nền tảng để người dùng tham gia các bài kiểm tra trắc nghiệm, quản lý câu hỏi, và theo dõi tiến độ học tập. Ứng dụng hỗ trợ cả người dùng thông thường và quản trị viên với các tính năng phong phú.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+## Tính năng chính
 
-In the project directory, you can run:
+### 1. **Người dùng**
+- **Tham gia Quiz**: Người dùng có thể tham gia các bài kiểm tra trắc nghiệm với giao diện thân thiện, hiển thị câu hỏi và các lựa chọn trả lời.
+- **Xem kết quả**: Sau khi hoàn thành bài kiểm tra, người dùng có thể xem kết quả chi tiết, bao gồm câu trả lời đúng/sai.
+- **Bảng xếp hạng**: Hiển thị bảng xếp hạng người dùng dựa trên điểm số.
+- **Quản lý hồ sơ cá nhân**:
+  - Xem và chỉnh sửa thông tin cá nhân.
+  - Đổi mật khẩu.
+- **Theo dõi tiến độ**: Xem lịch sử các bài kiểm tra đã tham gia và tiến độ học tập.
 
-### `npm start`
+### 2. **Quản trị viên**
+- **Quản lý người dùng**:
+  - Xem danh sách người dùng.
+  - Thêm, sửa, xóa thông tin người dùng.
+- **Quản lý bài kiểm tra (Quiz)**:
+  - Tạo mới bài kiểm tra.
+  - Cập nhật thông tin bài kiểm tra.
+  - Xóa bài kiểm tra.
+  - Xem chi tiết bài kiểm tra.
+- **Quản lý câu hỏi**:
+  - Thêm, sửa, xóa câu hỏi.
+  - Gắn câu hỏi vào các bài kiểm tra.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 3. **Tính năng khác**
+- **Đăng nhập/Đăng ký**:
+  - Hỗ trợ đăng nhập và đăng ký tài khoản.
+  - Quên mật khẩu và đặt lại mật khẩu.
+- **Giao diện thân thiện**:
+  - Hỗ trợ giao diện responsive, tối ưu cho cả máy tính và thiết bị di động.
+- **Thông báo**:
+  - Hiển thị thông báo (toast) khi có lỗi hoặc hành động thành công.
+- **Đa ngôn ngữ**:
+  - Hỗ trợ đa ngôn ngữ với i18next.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+ ---
+  
+## Công Nghệ Sử Dụng
 
-### `npm test`
+- **React**: Xây dựng giao diện người dùng dựa trên các thành phần (component).  
+- **Redux**: Quản lý trạng thái ứng dụng một cách tập trung và dễ dự đoán.  
+- **React Router**: Định tuyến cho ứng dụng, hỗ trợ điều hướng giữa các trang.  
+- **SCSS**: Tùy chỉnh giao diện với CSS mở rộng, hỗ trợ biến, lồng nhau và hơn thế nữa.  
+- **Axios**: Thư viện gửi yêu cầu HTTP đơn giản và hiệu quả.  
+- **React-Bootstrap**: Thư viện giao diện cung cấp các thành phần UI có sẵn.  
+- **React Toastify**: Hiển thị thông báo (notifications) đẹp mắt và dễ sử dụng.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Hướng dẫn sử dụng
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 1. Cài đặt
+Đảm bảo bạn đã cài đặt **Node.js v14.17.0** hoặc cao hơn.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+git clone https://github.com/AiNga04/my-base-react-redux
+cd my-base-react-redux
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 2. Chạy Ứng Dụng
+Khởi chạy ứng dụng ở chế độ phát triển bằng lệnh sau:
 
-### `npm run eject`
+```bash
+npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Mở trình duyệt và truy cập:  
+[http://localhost:3000](http://localhost:3000)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Trang web sẽ tự động tải lại khi bạn thực hiện thay đổi trong mã nguồn.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 3. Build Ứng Dụng
+Để build ứng dụng cho môi trường sản xuất, chạy lệnh:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm run build
+```
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Lệnh này sẽ tạo ra một thư mục `build` chứa ứng dụng đã được tối ưu hóa và nén, sẵn sàng để triển khai.

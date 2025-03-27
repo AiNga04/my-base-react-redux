@@ -1,7 +1,18 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Dashboard.scss";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+
+  const handleViewAllQuizzes = () => {
+    navigate("/admins/manage-quizzes");
+  };
+
+  const handleViewAllActivity = () => {
+    navigate("/admins/activity-feed");
+  };
+
   return (
     <div className="dashboard-container">
       <div className="dashboard-content">
@@ -9,9 +20,13 @@ const Dashboard = () => {
           <div className="section recent-quizzes">
             <div className="section-header">
               <h2>Recent Quizzes</h2>
-              <a href="#" className="view-all">
+              <button
+                className="view-all"
+                onClick={handleViewAllQuizzes}
+                aria-label="View all recent quizzes"
+              >
                 View All →
-              </a>
+              </button>
             </div>
             <div className="quiz-item">
               <h3>General Knowledge Quiz</h3>
@@ -41,9 +56,13 @@ const Dashboard = () => {
           <div className="section activity-feed">
             <div className="section-header">
               <h2>Activity Feed</h2>
-              <a href="#" className="view-all">
+              <button
+                className="view-all"
+                onClick={handleViewAllActivity}
+                aria-label="View all activity feed"
+              >
                 View All →
-              </a>
+              </button>
             </div>
             <div className="feed-item">
               <p>
@@ -74,23 +93,23 @@ const Dashboard = () => {
             <div className="resource-item">
               <h3>Quiz Documentation</h3>
               <p>Access quiz creation guides</p>
-              <a href="#" className="open-link">
+              <Link to="/admins/quiz-docs" className="open-link">
                 Open →
-              </a>
+              </Link>
             </div>
             <div className="resource-item">
               <h3>Performance Metrics</h3>
               <p>Monitor quiz performance</p>
-              <a href="#" className="open-link">
+              <Link to="/admins/performance-metrics" className="open-link">
                 Open →
-              </a>
+              </Link>
             </div>
             <div className="resource-item">
               <h3>Learning Resources</h3>
               <p>Tutorials and best practices</p>
-              <a href="#" className="open-link">
+              <Link to="/admins/learning-resources" className="open-link">
                 Open →
-              </a>
+              </Link>
             </div>
           </div>
         </div>

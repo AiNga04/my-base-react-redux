@@ -53,7 +53,7 @@ const UserDashboard = () => {
         <div className="recent-quizzes-section">
           <div className="section-header">
             <h2>Recent Quizzes</h2>
-            <a href="#" className="view-all">
+            <a href="users/recent-quizzes" className="view-all">
               View All →
             </a>
           </div>

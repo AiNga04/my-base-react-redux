@@ -22,6 +22,41 @@ const QuizDetail = () => {
   const [timeLeft, setTimeLeft] = useState(600); // 10 phút = 600 giây
 
   // Countdown timer logic
+  const handleFinish = useCallback(async () => {
+    if (!window.confirm("Are you sure you want to submit the quiz?")) {
+      return;
+    }
+
+    let object = {
+      quizId: +quizId,
+      answers: [],
+    };
+
+    quiz.forEach((item) => {
+      let answer = {
+        questionId: +item.questionId,
+        userAnswerId: [],
+      };
+
+      item.answers.forEach((ans) => {
+        if (ans.isSelected) {
+          answer.userAnswerId.push(ans.id);
+        }
+      });
+
+      object.answers.push(answer);
+    });
+
+    const dataResponse = await postSubmitQuiz(object);
+
+    if (dataResponse && dataResponse.EC === 0) {
+      setData(dataResponse.DT);
+      setIsShowModalResult(true);
+    } else {
+      toast.error(dataResponse.EM);
+    }
+  }, [quiz, quizId]); // Dependencies of handleFinish
+
   useEffect(() => {
     if (timeLeft <= 0) {
       handleFinish();
@@ -33,7 +68,7 @@ const QuizDetail = () => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [timeLeft]);
+  }, [timeLeft, handleFinish]); // Add handleFinish to dependencies
 
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
@@ -93,41 +128,6 @@ const QuizDetail = () => {
       setDisableNext(newIndex === quiz.length - 1);
       return newIndex;
     });
-  };
-
-  const handleFinish = async () => {
-    if (!window.confirm("Are you sure you want to submit the quiz?")) {
-      return;
-    }
-
-    let object = {
-      quizId: +quizId,
-      answers: [],
-    };
-
-    quiz.forEach((item) => {
-      let answer = {
-        questionId: +item.questionId,
-        userAnswerId: [],
-      };
-
-      item.answers.forEach((ans) => {
-        if (ans.isSelected) {
-          answer.userAnswerId.push(ans.id);
-        }
-      });
-
-      object.answers.push(answer);
-    });
-
-    const dataResponse = await postSubmitQuiz(object);
-
-    if (dataResponse && dataResponse.EC === 0) {
-      setData(dataResponse.DT);
-      setIsShowModalResult(true);
-    } else {
-      toast.error(dataResponse.EM);
-    }
   };
 
   const handleAnswerChange = (temp) => {

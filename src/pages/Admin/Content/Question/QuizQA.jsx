@@ -70,8 +70,6 @@ const ManageQuestion = () => {
     }
   };
 
-  console.log("questions", questions);
-
   // Thêm câu hỏi mới
   const handleAddQuestion = () => {
     const newQuestion = {

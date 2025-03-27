@@ -7,6 +7,8 @@ import About from "./pages/About/About";
 import Home from "./pages/Home/Home";
 import DashBoard from "./pages/Admin/Content/Dashboard";
 import UserDashboard from "./pages/User/UserDashboard";
+import RecentQuizzes from "./pages/User/RecentQuizzes";
+import QuizReview from "./pages/User/QuizReview";
 import EditProfile from "./pages/User/EditProfile";
 import Leaderboard from "./pages/User/Leaderboard";
 import PrivateRoute from "./routes/PrivateRoute";
@@ -42,6 +44,8 @@ const Layout = () => {
             <Route path="leaderboard" element={<Leaderboard />} />
             <Route path="view-progress" element={<ViewProgress />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="recent-quizzes" element={<RecentQuizzes />} />
+            <Route path="quiz/review/:id" element={<QuizReview />} />
           </Route>
         </Route>
 

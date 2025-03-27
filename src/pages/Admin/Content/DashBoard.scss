@@ -1,238 +1,219 @@
 .dashboard-container {
-  display: flex;
+  min-height: 100vh;
   width: 100%;
-  background: #2c3e50;
-  overflow: hidden;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #1e90ff, #87ceeb);
-    opacity: 0.7;
-    z-index: 0;
-    animation: rotateBackground 15s linear infinite;
-  }
-
-  .dashboard-sidebar {
-    height: 100vh;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(12px);
-    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.15);
-    transition: width 0.3s ease;
-    z-index: 10;
-    width: 250px;
-
-    &.collapsed {
-      width: 80px;
-    }
-  }
+  background: linear-gradient(
+    135deg,
+    #e9f0ff 0%,
+    #d4e1ff 100%
+  ); // Gradient nhẹ nhàng hơn
+  padding: 40px;
+  font-family: "Arial", sans-serif;
+  color: #2c3e50;
 
   .dashboard-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    overflow-y: auto;
-    z-index: 2;
-
-    .dashboard-header {
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(12px);
-      padding: 15px 20px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      margin-bottom: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-
-      svg {
-        font-size: 1.8rem;
-        color: #ffffff;
-        cursor: pointer;
-        transition: color 0.3s ease, transform 0.3s ease;
-
-        &:hover {
-          color: #1e90ff;
-          transform: rotate(90deg);
-        }
-      }
-
-      h1 {
-        font-size: 2rem;
-        color: #ffffff;
-        margin-left: 20px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-      }
-    }
+    max-width: 1300px; // Tăng chiều rộng tối đa để thoáng hơn
+    margin: 0 auto;
 
     .dashboard-main {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px; // Tăng khoảng cách giữa các section
 
       .section {
-        background: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(12px);
-        padding: 20px;
-        border-radius: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.25);
+        background: #ffffff;
+        border-radius: 20px; // Bo góc mềm mại hơn
+        padding: 30px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); // Shadow nhẹ và hiện đại
         transition: transform 0.3s ease;
 
         &:hover {
-          transform: translateY(-5px);
+          transform: translateY(-3px); // Hiệu ứng nâng nhẹ khi hover
+        }
+
+        &.recent-quizzes,
+        &.activity-feed {
+          grid-column: span 1;
+        }
+
+        &.resources {
+          grid-column: span 2;
         }
 
         .section-header {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: 20px;
+          margin-bottom: 25px;
 
           h2 {
-            font-size: 1.5rem;
-            color: #ffffff;
-            font-weight: 600;
+            font-size: 1.9rem;
+            color: #1a2b49; // Màu đậm hơn, dễ đọc
+            margin: 0;
+            font-weight: 700;
           }
 
           .view-all {
+            background: none;
+            border: none;
+            color: #4a90e2; // Màu xanh sáng hơn
             font-size: 1rem;
-            color: #1e90ff;
-            text-decoration: none;
-            transition: color 0.3s ease;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0;
+            transition: color 0.3s ease, transform 0.2s ease;
 
             &:hover {
-              color: #87ceeb;
+              color: #3267d6;
+              transform: translateX(5px); // Hiệu ứng dịch chuyển nhẹ
             }
           }
         }
       }
 
       .recent-quizzes {
-        grid-row: span 2;
-
         .quiz-item {
+          padding: 20px;
+          background: #f9fafc; // Nền sáng hơn
+          border-radius: 12px;
           margin-bottom: 20px;
-          padding: 15px;
-          background: rgba(255, 255, 255, 0.08);
-          border-radius: 8px;
-          border: 1px solid rgba(255, 255, 255, 0.15);
+          transition: all 0.3s ease;
+          border: 1px solid #e6e9f0; // Viền nhẹ để phân biệt
+
+          &:hover {
+            background: #f0f4ff; // Nền sáng hơn khi hover
+            transform: translateX(8px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+          }
 
           h3 {
-            font-size: 1.2rem;
-            color: #f0f4f8;
-            margin-bottom: 5px;
+            font-size: 1.3rem;
+            color: #1a2b49;
+            margin: 0 0 8px 0;
+            font-weight: 600;
           }
 
           p {
-            font-size: 0.9rem;
-            color: #c0c8d1;
-            margin-bottom: 10px;
+            font-size: 0.95rem;
+            color: #6b7280; // Màu xám nhẹ, dễ đọc
+            margin: 5px 0;
           }
 
           .progress-bar {
-            background: rgba(255, 255, 255, 0.15);
+            height: 10px;
+            background: #e6e9f0;
             border-radius: 5px;
-            height: 8px;
             overflow: hidden;
+            margin: 12px 0;
 
             .progress {
-              background: #1e90ff;
               height: 100%;
-              transition: width 0.3s ease;
+              background: linear-gradient(
+                90deg,
+                #34d399,
+                #10b981
+              ); // Gradient xanh lá hiện đại
+              transition: width 0.5s ease-in-out;
             }
-          }
-
-          p:last-child {
-            margin-top: 5px;
-            font-size: 0.9rem;
-            color: #f0f4f8;
           }
         }
       }
 
       .activity-feed {
-        grid-row: span 2;
-
         .feed-item {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 10px;
-          margin-bottom: 10px;
-          background: rgba(255, 255, 255, 0.08);
-          border-radius: 8px;
-          border: 1px solid rgba(255, 255, 255, 0.15);
+          padding: 15px 0;
+          border-bottom: 1px solid #e6e9f0;
+          transition: background 0.3s ease;
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          &:hover {
+            background: #f0f4ff;
+            border-radius: 8px;
+          }
 
           p {
             font-size: 1rem;
-            color: #f0f4f8;
+            color: #2c3e50;
             margin: 0;
+            line-height: 1.5;
 
             span {
-              color: #1e90ff;
-              font-weight: 500;
+              color: #4a90e2;
+              font-weight: 600;
+              transition: color 0.3s ease;
+
+              &:hover {
+                color: #3267d6;
+              }
             }
           }
 
           .time {
-            font-size: 0.9rem;
-            color: #c0c8d1;
+            font-size: 0.85rem;
+            color: #9ca3af;
+            display: block;
+            margin-top: 6px;
           }
         }
       }
 
       .resources {
-        grid-column: span 2;
-        display: flex;
-        gap: 20px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
 
         .resource-item {
-          flex: 1;
-          padding: 15px;
-          background: rgba(255, 255, 255, 0.08);
-          border-radius: 8px;
-          border: 1px solid rgba(255, 255, 255, 0.15);
+          padding: 25px;
+          background: linear-gradient(
+            145deg,
+            #f9fafc,
+            #e6e9f0
+          ); // Gradient nhẹ cho nền
+          border-radius: 12px;
+          text-align: center;
+          transition: all 0.3s ease;
+          border: 1px solid #e6e9f0;
+
+          &:hover {
+            background: linear-gradient(145deg, #f0f4ff, #e0e7ff);
+            transform: scale(1.03); // Hiệu ứng phóng to nhẹ
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+          }
 
           h3 {
-            font-size: 1.2rem;
-            color: #f0f4f8;
-            margin-bottom: 5px;
+            font-size: 1.3rem;
+            color: #1a2b49;
+            margin: 0 0 8px 0;
+            font-weight: 600;
           }
 
           p {
-            font-size: 0.9rem;
-            color: #c0c8d1;
-            margin-bottom: 10px;
+            font-size: 0.95rem;
+            color: #6b7280;
+            margin: 0 0 12px 0;
           }
 
           .open-link {
-            font-size: 1rem;
-            color: #1e90ff;
+            display: inline-block;
+            padding: 8px 16px;
+            background: #4a90e2;
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 600;
             text-decoration: none;
-            transition: color 0.3s ease;
+            border-radius: 20px;
+            transition: background 0.3s ease, transform 0.2s ease;
 
             &:hover {
-              color: #87ceeb;
+              background: #3267d6;
+              transform: translateY(-2px);
             }
           }
         }
       }
     }
-  }
-}
-
-/* Animation cho nền */
-@keyframes rotateBackground {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 100% 50%;
   }
 }
 
@@ -243,14 +224,10 @@
       .dashboard-main {
         grid-template-columns: 1fr;
 
-        .recent-quizzes,
-        .activity-feed {
-          grid-row: auto;
-        }
-
-        .resources {
-          grid-column: auto;
-          flex-direction: column;
+        .section {
+          &.resources {
+            grid-column: span 1;
+          }
         }
       }
     }
@@ -259,84 +236,99 @@
 
 @media (max-width: 768px) {
   .dashboard-container {
-    flex-direction: column;
-
-    .dashboard-sidebar {
-      width: 100%;
-      height: auto;
-
-      &.collapsed {
-        height: 60px;
-      }
-    }
+    padding: 25px;
 
     .dashboard-content {
-      padding: 15px;
-
-      .dashboard-header {
-        padding: 10px 15px;
-
-        h1 {
-          font-size: 1.5rem;
-        }
-
-        svg {
-          font-size: 1.5rem;
-        }
-      }
-
       .dashboard-main {
         .section {
-          padding: 15px;
+          padding: 20px;
 
           .section-header {
             h2 {
-              font-size: 1.3rem;
+              font-size: 1.6rem;
             }
 
             .view-all {
               font-size: 0.9rem;
             }
           }
-        }
 
-        .recent-quizzes .quiz-item {
-          padding: 10px;
+          &.resources {
+            grid-template-columns: 1fr;
 
-          h3 {
-            font-size: 1rem;
-          }
+            .resource-item {
+              padding: 20px;
 
-          p {
-            font-size: 0.8rem;
-          }
-        }
+              h3 {
+                font-size: 1.2rem;
+              }
 
-        .activity-feed .feed-item {
-          padding: 8px;
+              p {
+                font-size: 0.9rem;
+              }
 
-          p {
-            font-size: 0.9rem;
-          }
-
-          .time {
-            font-size: 0.8rem;
+              .open-link {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+              }
+            }
           }
         }
 
-        .resources .resource-item {
-          padding: 10px;
+        .recent-quizzes {
+          .quiz-item {
+            padding: 15px;
 
-          h3 {
-            font-size: 1rem;
+            h3 {
+              font-size: 1.15rem;
+            }
+
+            p {
+              font-size: 0.9rem;
+            }
+
+            .progress-bar {
+              height: 8px;
+              margin: 10px 0;
+            }
           }
+        }
 
-          p {
-            font-size: 0.8rem;
+        .activity-feed {
+          .feed-item {
+            padding: 12px 0;
+
+            p {
+              font-size: 0.95rem;
+            }
+
+            .time {
+              font-size: 0.8rem;
+            }
           }
+        }
+      }
+    }
+  }
+}
 
-          .open-link {
-            font-size: 0.9rem;
+@media (max-width: 480px) {
+  .dashboard-container {
+    padding: 15px;
+
+    .dashboard-content {
+      .dashboard-main {
+        .section {
+          padding: 15px;
+
+          .section-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+
+            h2 {
+              font-size: 1.4rem;
+            }
           }
         }
       }
